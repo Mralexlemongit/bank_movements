@@ -1,0 +1,32 @@
+{% if messages %}
+{% load static widget_tweaks %}
+<script src="{% static "/vendor/toastr/js/toastr.min.js" %}"></script> 
+
+<script>
+{% for message in messages %}
+    toastr.{{ message.level_tag }}("{{ message }}", "{{ message.extra_tags|default:'' }}", {
+        timeOut: 7e3,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        positionClass: "{{ position_class|default:'toast-bottom-right' }}",
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        tapToDismiss: !1
+    })
+    {% comment %} 
+        console.log('{{ message }}')
+        console.log('{{ message.level_tag }}')
+        console.log('{{ message.extra_tags }}') 
+    {% endcomment %}
+{% endfor %}
+</script>
+{% endif %}

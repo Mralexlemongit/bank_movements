@@ -1,0 +1,35 @@
+{% extends 'elements/layouts/admin.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+{% endblock %}
+
+{% block content %}
+    <div class="form-head mb-4 d-sm-flex">
+        <div class="pr-3 me-auto mb-sm-0 mb-3">
+            <h2 class="text-black font-w600 mb-0">Cuentas en {{ bank.display }}</h2>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="row">
+                {% for account in accounts  %}
+                    <div class="card col-xl-6">
+                        <a href="{% url 'transactions' link_id account.id %}" class="m-6">
+                            <div class="card-header border-0 pb-0">
+                                <h5 class="card-title">{{ account.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p ><strong>Balance: </strong> {{ account.balance.available }}</p>
+                                <p ><strong>Referencia: </strong>{{ account.number }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    {% load static widget_tweaks %}
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="{{ dz_array.public.title }}" />
+	<meta property="og:title" content="{{ dz_array.public.title }}" />
+	<meta property="og:description" content="{{ dz_array.public.title }}" />
+	<meta property="og:image" content="https://zenix.dexignzone.com/django/social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+    <title>{{ dz_array.public.title }}</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static dz_array.public.favicon %}">
+    
+	{% load custom_tags %}
+
+    {% for cssurl in dz_array.pagelevel.app.app_views.css|getdata:request.path %}
+        <link rel="stylesheet" href="{% static cssurl %}" >
+	{% endfor %}
+
+    {% for cssurl in dz_array.global.css %}
+        <link rel="stylesheet" href="{% static cssurl %}" >
+    {% endfor %}
+
+</head>
+<body class="h-100">
+
+    <div class="login-main-page" style="background-image: url({% static 'images/bg-login.jpg' %});">
+        <div class="login-wrapper">
+            <div class="login-aside-left" style="background-image: url({% static 'images/bg-login2.png' %});">
+                <img src="{% static 'images/branding.png' %}" alt="Bank Movements" class="mr-2" width="300"/>
+                <div class="login-description">
+                    <h2 class="text-black mb-2">Manten tus movimientos monitoreados</h2>
+                </div>
+            </div>
+            <div class="login-aside-right">
+                <div class="row justify-content-center h-100 align-items-center">
+                  <div class="col-xl-7 col-xxl-7">
+                    <div class="authincation-content">
+                      <div class="row no-gutters">
+                        <div class="col-xl-12">
+                          <div class="auth-form-1">
+                            <div class="mb-4">
+                                <h2 class="text-white mb-1">Regístrate</h2>
+                            </div>
+                            <form method='post'>
+                                {% csrf_token %}
+                                <div class="row">
+                                
+                                    <div class="form-group col-md-12">
+                                        <label class="mb-2 "><strong class="text-white">Correo Electronico</strong></label>
+                                        {{ form.email|attr:"type:email"|attr:"class:form-control"|attr:"placeholder:Correo Electronico" }}
+                                        <div class="text-danger w-100 d-block mt-1">
+                                            {{ form.email.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="mb-2 "><strong class="text-white">Nombre(s)</strong></label>
+                                        {{ form.first_name|attr:"class:form-control"|attr:"placeholder:Nombre(s)"|attr:"type:text" }}   
+                                        <div class="text-danger w-100 d-block mt-1">
+                                            {{ form.first_name.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="mb-2 "><strong class="text-white">Apellidos</strong></label>
+                                        {{ form.last_name|attr:"class:form-control"|attr:"placeholder:Apellidos"|attr:"type:text" }}   
+                                        <div class="text-danger w-100 d-block mt-1">
+                                            {{ form.last_name.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="mb-2 "><strong class="text-white">Contraseña</strong></label>
+                                        {{ form.password1|attr:"class:form-control"|attr:"placeholder:Contraseña"|attr:"type:password" }}
+                                        <div class="text-danger w-100 d-block mt-1">
+                                            {{ form.password1.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="mb-2 "><strong class="text-white">Confirmar Contraseña</strong></label>
+                                        {{ form.password2|attr:"class:form-control"|attr:"placeholder:Confirmar Contraseña"|attr:"type:password" }}
+                                        <div class="text-danger w-100 d-block mt-1">
+                                            {{ form.password2.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn bg-white text-primary btn-block">
+                                        Registrarme
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="new-account mt-2">
+                                <p class="text-white">
+                                    ¿Ya tienes una cuenta? <a class="text-white text-decoration-underline" href="{% url 'login' %}">Entrar</a>
+                                </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--**********************************    Scripts    ***********************************-->
+    <!-- Required vendors -->
+    {% for jsurl in dz_array.global.js.top %}
+        <script src="{% static jsurl %}"></script>
+    {% endfor %}
+
+    {% for jsurl in dz_array.pagelevel.app.app_views.js|getdata:request.path %}
+        <script src="{% static jsurl %}"></script>
+    {% endfor %}
+
+    {% for jsurl in dz_array.global.js.bottom %}
+        <script src="{% static jsurl %}"></script>
+    {% endfor %}
+
+    {% block additional_js %}
+    {% endblock %}
+
+    {% include 'elements/toastr_alert.html' with position_class="toast-top-right" %}
+
+</body>
+</html>

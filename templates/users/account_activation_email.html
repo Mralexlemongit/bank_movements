@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hola {{ user.first_name }} {{ user.last_name }},
+
+Estas a un paso de formar parte de la comunidad de Bank Movements.
+
+Completa tu registro al hacer click en el siguuiente enlace:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

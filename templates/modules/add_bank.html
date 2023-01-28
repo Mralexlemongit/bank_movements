@@ -1,0 +1,35 @@
+{% extends 'elements/layouts/admin.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+{% endblock %}
+
+{% block content %}
+    <div class="form-head mb-4 d-sm-flex">
+        <div class="pr-3 me-auto mb-sm-0 mb-3">
+            <h2 class="text-black font-w600 mb-0">Agregar un Banco</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                {% for bank in banks %}
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <a href="{% url 'login-bank' bank.slug %}">
+                                <div class="card-body">
+                                    <div class="profile-blog">
+                                        <h5 class="text-primary d-inline">{{ bank.display }}</h5>
+                                        <img src="{% static bank.logo %}" alt="" class="img-fluid mt-4 mb-4 w-100">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

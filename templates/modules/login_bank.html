@@ -1,0 +1,53 @@
+{% extends 'elements/layouts/admin.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block additional_css %}
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center h-100 align-items-center">
+    <div class="col-md-6">
+      <div class="authincation-content">
+        <div class="row no-gutters">
+          <div class="col-xl-12">
+            <div class="auth-form">
+              <div class="text-center mb-3">
+                <a href="{% url 'index' %}">
+                  <img src="{% static bank.logo %}" class="img-fluid mt-4 mb-4 w-25">
+                </a>
+              </div>
+              <h3 class="text-center mb-4 text-white">{{ bank.display }}</h3>
+              <h6 class="text-center mb-4 text-white">Introduce tus claves</h6>
+
+              <form method="post" action="{% url 'login-bank' bank.slug %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label class="mb-1 text-white"><strong>Cuenta</strong></label>
+                  {{ form.user|attr:"class:form-control" }}
+                  {{ form.user.errors}}
+                </div>
+                
+                <div class="form-group">
+                  <label class="mb-1 text-white"><strong>Contraseña</strong></label>
+                  {{ form.password|attr:"class:form-control" }}
+                  {{ form.password.errors}}
+                </div>
+                
+                <div class="text-center">
+                  <button type="submit" class="btn bg-white text-primary btn-block">Agregar Banco</button>
+                </div>
+
+              </form>
+
+              <div class="new-account mt-3">
+                <p class="text-white"><a class="text-white" href="{% url 'add-bank' %}">Volver</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

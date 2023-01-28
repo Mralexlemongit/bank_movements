@@ -1,0 +1,45 @@
+{% extends 'elements/layouts/admin.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Movimientos de la cuenta "{{account.name}}" </h4>
+              <h4 class="card-title"> Balance {{ account.balance.available }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="display min-w850">
+                        <thead>
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Fecha</th>
+                                <th>Descripcion</th>
+                                <th>Categoria</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for t in transactions %}
+                            <tr>
+                              <td>{{ t.amount }}</td>
+                              <td>{{ t.accounting_date }}</td>
+                              <td>{{ t.description }}</td>
+                              <td>{{ t.category }}</td>
+                              <td>{{ t.status }}</td>
+                            </tr>
+                            {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
